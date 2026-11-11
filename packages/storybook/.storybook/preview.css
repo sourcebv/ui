@@ -1,0 +1,29 @@
+@import "tailwindcss";
+/* Relative import so the CSS always comes from source (HMR, no build). */
+@import "../../styles/index.css";
+
+@source "../../react/src";
+
+/* Example of a custom theme: redefine the tokens under any `data-theme` name. */
+@layer base {
+  [data-theme="ocean"] {
+    color-scheme: dark;
+
+    --background: oklch(0.22 0.04 240);
+    --foreground: oklch(0.96 0.01 220);
+    --muted: oklch(0.3 0.04 240);
+    --muted-foreground: oklch(0.75 0.03 230);
+    --border: oklch(0.35 0.05 240);
+    --primary: oklch(0.72 0.14 200);
+    --primary-foreground: oklch(0.2 0.04 240);
+    --tertiary: oklch(0.3 0.04 240);
+    --danger: oklch(0.68 0.2 20);
+    --danger-foreground: oklch(0.98 0 0);
+    --radius: 9999px;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}

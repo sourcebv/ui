@@ -8,7 +8,8 @@ Monorepo for UI libraries published to npm (`github.com/sourcebv/ui`, Apache-2.0
 
 - `packages/react` → `@sourcebv/react` (React 19 component library, peer dependencies `react`/`react-dom` `^19.0.0`).
 - `packages/storybook` → `@sourcebv/storybook` (**private**, never published). Storybook 10 (`@storybook/react-vite`) with addon-docs (autodocs on by default) and addon-a11y. Depends on `@sourcebv/react` through the workspace link.
-- `packages/styles` → empty and intentionally untouched for now.
+- `packages/styles` → `@sourcebv/styles` (published). Tailwind CSS v4 styles + `tailwind-variants` style functions, HeroUI-style. Consumers need Tailwind v4: `@import "tailwindcss"; @import "@sourcebv/styles";`.
+- `@sourcebv/react` depends on `@sourcebv/styles` (style functions) and `react-aria-components` (primitives). Workspaces are listed explicitly in root `package.json` so `styles` builds before `react`.
 
 ## Commands (run from repo root)
 
@@ -31,6 +32,14 @@ Monorepo for UI libraries published to npm (`github.com/sourcebv/ui`, Apache-2.0
 - `src/index.ts` is the **single, manually maintained** public entry point: add `export * from "./components/<component-name>";` for each new component. There are no subpath exports.
 - Every component gets a story next to it: `<component-name>.stories.tsx` (CSF3, `Meta`/`StoryObj` from `@storybook/react-vite`, `satisfies Meta<typeof X>`). Storybook loads stories from `packages/react/src/**/*.stories.@(ts|tsx)` and `*.mdx`. Stories aren't in the npm package (tsup only bundles `src/index.ts`) and aren't run by Vitest.
 - tsup bundles only `src/index.ts`; `react`, `react-dom` and `react/jsx-runtime` are external. `sideEffects: false`.
+
+## Styles conventions (`packages/styles`)
+
+- Tokens are plain CSS variables (`--primary`, `--background`, …) in `themes/default.css`, inside `@layer base` so unlayered app CSS always wins. `base.css` maps them onto Tailwind with `@theme inline` (`bg-primary`, `text-danger`, `rounded-base`, …).
+- A theme is any selector redefining tokens (`:root`/`.light`/`[data-theme="light"]`, `.dark`/`[data-theme="dark"]`, or any `[data-theme="<name>"]`). Tokens derived from other tokens (`--secondary`, `--danger-soft`, `--focus`, …) are declared in the `:root, .light, .dark, [data-theme]` block so they're recalculated per theme scope — put new derived tokens there.
+- Component CSS: `components/<name>.css`, BEM classes (`.button`, `.button--primary`) written with `@apply` in `@layer components`; states use react-aria data attributes (`data-hovered:`, `data-pressed:`, `data-focus-visible:`, `data-disabled:`). Import it from `index.css`.
+- Style function: `src/components/<name>/<name>.styles.ts` (`tv()` mapping variants → BEM classes), barrel `index.ts`, re-exported from `src/index.ts`.
+- `@sourcebv/react` resolves `@sourcebv/styles` to source via tsconfig `paths` + Vitest alias (no build needed for typecheck/tests); Storybook aliases it too and imports the CSS relatively in `.storybook/preview.css`.
 
 ## Toolchain notes
 

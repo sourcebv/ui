@@ -1,0 +1,52 @@
+@layer components {
+  .button {
+    @apply relative shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap outline-none select-none;
+    @apply transition-all duration-150 ease-out;
+    @apply data-pressed:scale-[0.98];
+    @apply data-focus-visible:outline-2 data-focus-visible:outline-offset-2 data-focus-visible:outline-focus;
+    @apply data-disabled:cursor-not-allowed data-disabled:opacity-50;
+    @apply data-pending:cursor-wait data-pending:opacity-70;
+  }
+
+  /* Sizes */
+  .button--sm {
+    @apply h-8 px-3 text-sm;
+  }
+
+  .button--md {
+    @apply h-10 px-4 text-sm;
+  }
+
+  .button--lg {
+    @apply h-12 px-6 text-base;
+  }
+
+  /* Variants */
+  .button--primary {
+    @apply bg-primary text-primary-foreground data-hovered:bg-primary/90;
+  }
+
+  .button--secondary {
+    @apply bg-secondary text-secondary-foreground data-hovered:bg-primary/20;
+  }
+
+  .button--tertiary {
+    @apply bg-tertiary text-tertiary-foreground data-hovered:bg-tertiary/80;
+  }
+
+  .button--outline {
+    @apply border border-border bg-transparent text-foreground data-hovered:bg-foreground/5;
+  }
+
+  .button--ghost {
+    @apply bg-transparent text-foreground data-hovered:bg-foreground/5;
+  }
+
+  .button--danger {
+    @apply bg-danger text-danger-foreground data-hovered:bg-danger/90;
+  }
+
+  .button--danger-soft {
+    @apply bg-danger-soft text-danger-soft-foreground data-hovered:bg-danger/20;
+  }
+}
