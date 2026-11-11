@@ -79,14 +79,6 @@ export const Disabled: Story = {
   render: AllVariants.render,
 };
 
-/**
- * Tokens are plain CSS variables. Overriding `--primary` on `:root` in the
- * app's CSS restyles every primary-derived style (secondary, hover, focus ring).
- *
- * To scope an override to a subtree, put it on an element with a `data-theme`
- * attribute: themes can be partial and only redefine what they need, the rest
- * is inherited from the surrounding theme.
- */
 export const CustomPrimary: Story = {
   render: (args) => (
     <div
