@@ -43,6 +43,10 @@
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run typecheck && npm run test && npm run build"
   },
+  "dependencies": {
+    "@sourcebv/styles": "^0.1.0",
+    "react-aria-components": "^1.22.1"
+  },
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

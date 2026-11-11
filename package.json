@@ -12,7 +12,9 @@
   },
   "type": "module",
   "workspaces": [
-    "packages/*"
+    "packages/styles",
+    "packages/react",
+    "packages/storybook"
   ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",

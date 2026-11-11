@@ -1,0 +1,46 @@
+@layer base {
+  :root,
+  .light,
+  [data-theme="light"] {
+    color-scheme: light;
+
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.21 0.006 285.9);
+    --muted: oklch(0.967 0.001 286.4);
+    --muted-foreground: oklch(0.552 0.016 285.9);
+    --border: oklch(0.92 0.004 286.3);
+
+    --primary: oklch(0.546 0.245 262.9);
+    --primary-foreground: oklch(0.985 0 0);
+    --tertiary: oklch(0.945 0.003 286.3);
+    --danger: oklch(0.577 0.245 27.3);
+    --danger-foreground: oklch(0.985 0 0);
+
+    --radius: 0.5rem;
+  }
+
+  .dark,
+  [data-theme="dark"] {
+    color-scheme: dark;
+
+    --background: oklch(0.141 0.005 285.8);
+    --foreground: oklch(0.985 0 0);
+    --muted: oklch(0.274 0.006 286);
+    --muted-foreground: oklch(0.705 0.015 286.1);
+    --border: oklch(0.274 0.006 286);
+    --tertiary: oklch(0.274 0.006 286);
+    --danger: oklch(0.637 0.237 25.3);
+  }
+
+  :root,
+  .light,
+  .dark,
+  [data-theme] {
+    --focus: var(--primary);
+    --tertiary-foreground: var(--foreground);
+    --secondary: color-mix(in oklab, var(--primary) 14%, transparent);
+    --secondary-foreground: var(--primary);
+    --danger-soft: color-mix(in oklab, var(--danger) 14%, transparent);
+    --danger-soft-foreground: var(--danger);
+  }
+}

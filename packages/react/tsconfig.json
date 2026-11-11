@@ -1,7 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": ["vitest/globals", "@testing-library/jest-dom"]
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
+    "paths": {
+      "@sourcebv/styles": ["../styles/src/index.ts"]
+    }
   },
   "include": ["src", "*.config.ts", "vitest.setup.ts"]
 }
